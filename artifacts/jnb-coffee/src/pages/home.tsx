@@ -50,10 +50,10 @@ export default function Home() {
           </Link>
           
           <nav className="hidden md:flex items-center gap-8 font-medium">
-            <a href="#story" className="text-foreground hover:text-accent transition-colors">Our Story</a>
-            <a href="#menu" className="text-foreground hover:text-accent transition-colors">Menu</a>
-            <a href="#ambiance" className="text-foreground hover:text-accent transition-colors">Ambiance</a>
-            <a href="#events" className="text-foreground hover:text-accent transition-colors">Events</a>
+            <a href="#story" className={`transition-colors hover:text-accent ${isScrolled ? "text-foreground" : "text-white drop-shadow"}`}>Our Story</a>
+            <a href="#menu" className={`transition-colors hover:text-accent ${isScrolled ? "text-foreground" : "text-white drop-shadow"}`}>Menu</a>
+            <a href="#ambiance" className={`transition-colors hover:text-accent ${isScrolled ? "text-foreground" : "text-white drop-shadow"}`}>Ambiance</a>
+            <a href="#events" className={`transition-colors hover:text-accent ${isScrolled ? "text-foreground" : "text-white drop-shadow"}`}>Events</a>
           </nav>
           
           <Button asChild className="hidden md:flex bg-accent hover:bg-accent/90 text-white rounded-full px-6">
