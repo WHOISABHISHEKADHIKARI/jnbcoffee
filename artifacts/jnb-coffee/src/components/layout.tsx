@@ -191,7 +191,7 @@ export function PageHero({ tag, title, subtitle, image }: {
       </div>
       <div className="relative z-10 container mx-auto px-5 md:px-8 pb-16">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          <p className="text-accent text-sm font-bold tracking-[0.25em] uppercase mb-3">{tag}</p>
+          <p className="text-white/70 text-sm font-bold tracking-[0.25em] uppercase mb-3">{tag}</p>
           <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight mb-3">{title}</h1>
           <p className="text-white/75 text-lg max-w-lg">{subtitle}</p>
         </motion.div>
