@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Link } from "wouter";
 import {
-  MapPin, Phone, Instagram, Facebook, ArrowRight, Star,
-  Clock, Mail, Menu, X, Coffee, Cake, Utensils, ChevronDown
+  MapPin, Phone, ArrowRight, Star,
+  Clock, Mail, Coffee, Cake, Utensils, ChevronDown
 } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import logoImg from "@assets/20240122_180430_0000_1775752179612.png";
+import { Navbar, Footer } from "@/components/layout";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -66,84 +66,11 @@ const stats = [
 ];
 
 export default function Home() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMenuTab, setActiveMenuTab] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navLinks = [
-    { href: "#story", label: "Our Story" },
-    { href: "#menu", label: "Menu" },
-    { href: "#ambiance", label: "Ambiance" },
-    { href: "#events", label: "Events" },
-    { href: "#contact", label: "Contact" },
-  ];
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-
-      {/* ── NAVIGATION ── */}
-      <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
-      }`}>
-        <div className="container mx-auto px-5 md:px-8 flex items-center justify-between">
-          <Link href="/" className="flex items-center group">
-            <img src={logoImg} alt="J&B Coffee" className="h-11 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow" />
-          </Link>
-
-          <nav className="hidden lg:flex items-center gap-7 font-medium text-[15px]">
-            {navLinks.map(link => (
-              <a key={link.href} href={link.href}
-                className={`transition-colors duration-200 hover:text-accent font-medium ${isScrolled ? "text-foreground" : "text-white drop-shadow"}`}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <Button asChild className="hidden lg:flex bg-accent hover:bg-accent/85 text-white rounded-full px-6 h-10 text-sm font-semibold shadow-md hover:shadow-lg transition-all">
-              <a href="#events">Book a Table</a>
-            </Button>
-            <button className="lg:hidden p-2 rounded-lg" onClick={() => setMobileMenuOpen(true)}
-              aria-label="Open menu">
-              <Menu className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}>
-            <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 25 }}
-              className="absolute right-0 top-0 h-full w-72 bg-white shadow-2xl flex flex-col p-8"
-              onClick={e => e.stopPropagation()}>
-              <div className="flex justify-between items-center mb-10">
-                <img src={logoImg} alt="J&B Coffee" className="h-12 w-auto" />
-                <button onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-full hover:bg-muted transition-colors">
-                  <X className="w-5 h-5 text-foreground" />
-                </button>
-              </div>
-              <nav className="flex flex-col gap-6">
-                {navLinks.map(link => (
-                  <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)}
-                    className="text-xl font-semibold text-foreground hover:text-accent transition-colors">{link.label}</a>
-                ))}
-              </nav>
-              <Button asChild className="mt-auto bg-accent hover:bg-accent/85 text-white rounded-full h-12 font-semibold">
-                <a href="#events" onClick={() => setMobileMenuOpen(false)}>Book a Table</a>
-              </Button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Navbar transparent />
 
       {/* ── HERO ── */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -164,10 +91,10 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="bg-accent hover:bg-accent/85 text-white rounded-full text-base px-9 h-14 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 font-semibold">
-                <a href="#menu">Explore Menu</a>
+                <Link href="/menu">Explore Menu</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/40 rounded-full text-base px-9 h-14 backdrop-blur-sm font-semibold">
-                <a href="#events">Book a Table</a>
+                <Link href="/events">Book a Table</Link>
               </Button>
             </div>
           </motion.div>
@@ -210,9 +137,9 @@ export default function Home() {
                 <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                   Every corner of our cafe tells a story through local art, every brew reflects our obsession with quality, and every visit feels like coming home to old friends. This isn't just a cafe — it's your neighborhood living room.
                 </p>
-                <a href="#menu" className="inline-flex items-center gap-2 text-secondary hover:text-accent font-semibold text-lg transition-colors group">
+                <Link href="/menu" className="inline-flex items-center gap-2 text-secondary hover:text-accent font-semibold text-lg transition-colors group">
                   See our menu <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
               </motion.div>
             </AnimatedSection>
 
@@ -457,95 +384,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="bg-[#130813] text-white">
-        {/* CTA strip */}
-        <div className="bg-accent">
-          <div className="container mx-auto px-5 md:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-5">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">Ready for your next favorite cup?</h3>
-              <p className="text-white/80">Walk in any time or book ahead for your gathering.</p>
-            </div>
-            <Button asChild className="bg-white text-accent hover:bg-white/90 rounded-full px-8 h-12 font-bold text-base shadow-lg shrink-0">
-              <a href="https://jnbcoffee.com.np" target="_blank" rel="noopener noreferrer">Order Now</a>
-            </Button>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-5 md:px-8 pt-16 pb-10">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div>
-              <img src={logoImg} alt="J&B Coffee" className="h-16 w-auto mb-5" />
-              <p className="text-white/55 text-sm leading-relaxed mb-6">
-                Kathmandu's neighborhood coffee house blending Nepali warmth with modern specialty coffee culture.
-              </p>
-              <div className="flex gap-3">
-                <a href="https://www.instagram.com/jnbcoffee/" target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors">
-                  <Instagram className="w-4 h-4" />
-                </a>
-                <a href="https://www.facebook.com/jnbcoffee/" target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors">
-                  <Facebook className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-accent mb-6">Explore</h4>
-              <ul className="space-y-3 text-white/60 text-sm">
-                {navLinks.map(link => (
-                  <li key={link.href}>
-                    <a href={link.href} className="hover:text-white transition-colors">{link.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-accent mb-6">Contact</h4>
-              <ul className="space-y-4 text-white/60 text-sm">
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <span>Kathmandu, Nepal</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-accent shrink-0" />
-                  <a href="tel:+977980000000" className="hover:text-white transition-colors">+977 980-000-0000</a>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-accent shrink-0" />
-                  <a href="mailto:hello@jnbcoffee.com.np" className="hover:text-white transition-colors">hello@jnbcoffee.com.np</a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-accent mb-6">Opening Hours</h4>
-              <ul className="space-y-2.5 text-sm">
-                <li className="flex justify-between text-white/60">
-                  <span>Mon – Fri</span><span>7:00 AM – 8:00 PM</span>
-                </li>
-                <li className="flex justify-between text-white/60">
-                  <span>Saturday</span><span>8:00 AM – 9:00 PM</span>
-                </li>
-                <li className="flex justify-between text-white/60">
-                  <span>Sunday</span><span>8:00 AM – 8:00 PM</span>
-                </li>
-                <li className="mt-4 pt-4 border-t border-white/10 flex items-center gap-2 text-green-400 text-sm font-medium">
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                  Open now — walk on in
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-white/35 text-xs">
-            <p>&copy; {new Date().getFullYear()} J&B Coffee. All rights reserved.</p>
-            <p>Made with love in Kathmandu, Nepal</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
