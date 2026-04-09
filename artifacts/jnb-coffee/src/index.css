@@ -72,9 +72,9 @@
   --sidebar-border: 0 0% 90%;
   --sidebar-primary: 0 31% 49%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 301 74% 49%;
+  --sidebar-accent: 0 90% 7%;
   --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-ring: 301 74% 49%;
+  --sidebar-ring: 0 90% 7%;
 
   --popover: 0 0% 100%;
   --popover-foreground: 0 0% 10%;
@@ -91,18 +91,18 @@
   --muted: 0 0% 96%;
   --muted-foreground: 0 0% 45%;
 
-  /* #D921D6 */
-  --accent: 301 74% 49%;
+  /* #240202 */
+  --accent: 0 90% 7%;
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
   --input: 0 0% 90%;
-  --ring: 301 74% 49%;
+  --ring: 0 90% 7%;
   
   --chart-1: 0 31% 49%;
-  --chart-2: 301 74% 49%;
+  --chart-2: 0 90% 7%;
   --chart-3: 297 67% 37%;
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
@@ -134,9 +134,9 @@
   --sidebar-border: 0 0% 20%;
   --sidebar-primary: 0 31% 49%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 301 74% 49%;
+  --sidebar-accent: 0 90% 7%;
   --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-ring: 301 74% 49%;
+  --sidebar-ring: 0 90% 7%;
 
   --popover: 0 0% 8%;
   --popover-foreground: 0 0% 95%;
@@ -151,14 +151,14 @@
   --muted: 0 0% 15%;
   --muted-foreground: 0 0% 60%;
 
-  --accent: 301 74% 49%;
+  --accent: 0 90% 7%;
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
   --input: 0 0% 20%;
-  --ring: 301 74% 49%;
+  --ring: 0 90% 7%;
 }
 
 @layer base {
