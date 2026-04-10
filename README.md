@@ -4,3 +4,4 @@
  
 - jnb-coffee-theme.zip > WordPress theme with all CPT activated 
 - jnb-coffee-themev1.zip > Cloned/base theme version 
+ 
