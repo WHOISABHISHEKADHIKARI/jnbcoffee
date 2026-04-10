@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Instagram, Facebook, MapPin, Phone, Mail } from "lucide-react";
+import { Menu, X, Instagram, Facebook, MapPin, Phone, Mail, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import logoImg from "@assets/20240122_180430_0000_1775752179612.png";
@@ -96,8 +96,33 @@ export function Navbar({ transparent = false }: { transparent?: boolean }) {
 }
 
 export function Footer() {
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <footer className="bg-[#130813] text-white">
+    <>
+      <AnimatePresence>
+        {showTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.7, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.7, y: 20 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-accent text-white shadow-lg hover:shadow-xl hover:-translate-y-1 transition-transform flex items-center justify-center"
+            aria-label="Back to top"
+          >
+            <ArrowUp className="w-5 h-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      <footer className="bg-[#130813] text-white">
       <div className="bg-accent">
         <div className="container mx-auto px-5 md:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-5">
           <div>
@@ -177,6 +202,7 @@ export function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }
 
